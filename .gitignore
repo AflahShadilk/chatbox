@@ -49,3 +49,7 @@ captures/
 # Environment Files
 .env
 *.env
+# Ignore Desktop Auto-Generated Builds
+linux/
+macos/
+windows/
