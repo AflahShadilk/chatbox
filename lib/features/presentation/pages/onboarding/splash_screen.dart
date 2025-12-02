@@ -1,6 +1,6 @@
 import 'package:chatbox/core/constant/appcolors/app_colors.dart';
 import 'package:chatbox/features/presentation/pages/navigation/navigation_page.dart';
-import 'package:chatbox/features/presentation/pages/onboarding/welcome_page.dart';
+import 'package:chatbox/features/presentation/pages/auth/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
