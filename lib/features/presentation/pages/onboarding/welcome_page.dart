@@ -1,7 +1,8 @@
 import 'package:chatbox/core/constant/appcolors/app_colors.dart';
+import 'package:chatbox/features/presentation/controller/auth/google_auth_controller.dart';
 import 'package:chatbox/features/presentation/pages/widgets/textstyles/reusable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -13,6 +14,8 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
+    final GoogleAuthController controller = Get.find();
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -102,26 +105,29 @@ class _WelcomePageState extends State<WelcomePage> {
               bottom: 80,
               left: 0,
               right: 0,
-              child: GestureDetector(
-                onTap: () async{
-                  final pref=await SharedPreferences.getInstance();
-                  pref.setBool("saveKey", true);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.white),
-                    shape: BoxShape.circle,
-                  ),
-                  height: 60,
-                  width: 60,
-                  child: Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: Image.asset(
-                      'asset/icons/google.png',
-                    ),
-                  ),
-                ),
-              ),
+              child: Obx(() => controller.isLoading.value
+                  ? Center(child: CircularProgressIndicator())
+                  : Center(
+                      child: GestureDetector(
+                        onTap: () async {
+                          controller.signInWithGoogle();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.white),
+                            shape: BoxShape.circle,
+                          ),
+                          height: 60,
+                          width: 60,
+                          child: Padding(
+                            padding: const EdgeInsets.all(13.0),
+                            child: Image.asset(
+                              'assets/icons/google.png',
+                            ),
+                          ),
+                        ),
+                      ),
+                    )),
             )
           ],
         ),

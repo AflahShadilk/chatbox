@@ -1,7 +1,8 @@
 import 'package:chatbox/core/constant/appcolors/app_colors.dart';
-import 'package:chatbox/features/presentation/pages/navigation/navigation_bar.dart';
+import 'package:chatbox/features/presentation/pages/navigation/navigation_page.dart';
 import 'package:chatbox/features/presentation/pages/onboarding/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,13 +35,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     if (!mounted) return;
     
     if (!userLogin) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => WelcomePage())
-      );
+      Get.offAll(()=>const  WelcomePage());
     } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => NavigationPage())
-      );
+      Get.offAll(()=> NavigationPage());
     }
   }
 
@@ -50,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       backgroundColor: AppColors.white,
       body: Center(
         child: LottieBuilder.asset(
-          'asset/animations/Live chatbot.json',
+          'assets/animations/Live chatbot.json',
           controller: _controller,
           onLoaded: (composition) {
             _controller
